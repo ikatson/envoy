@@ -63,7 +63,8 @@ void LdsApi::onConfigUpdate(const ResourceVector& resources) {
         ENVOY_LOG(debug, "lds: add/update listener '{}' skipped", listener_name);
       }
     } catch (const EnvoyException& e) {
-      throw EnvoyException(fmt::format("Error adding/updating listener {}: {}", listener_name, e.what()));
+      ENVOY_LOG(warn, "Error adding/updating listener {}: {}", listener_name, e.what());
+      continue;
     }
   }
 
